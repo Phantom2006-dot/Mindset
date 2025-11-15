@@ -10,8 +10,8 @@ import { insertSubscriberSchema, type InsertSubscriber } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { Check, Lightbulb, Users, TrendingUp } from "lucide-react";
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
-import bookCoverUrl from "@assets/WhatsApp-Image-2025-10-31-at-11.28.56_1763185454539.jpeg";
-import videoUrl from "@assets/Firefly \"A mesmerizing underwater scene featuring glowing 3D jellyfish gracefully swimming in deep w (1)_1763185426158.mp4";
+import bookCoverUrl from "@assets/book-cover.jpeg";
+import videoUrl from "@assets/jellyfish-video.mp4";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
