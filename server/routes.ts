@@ -45,7 +45,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         await transporter.sendMail({
           from: process.env.EMAIL_USER,
           to: "danielnworah2006@gmail.com",
-          subject: "🎉 New Subscriber - Mindset Before Skillset",
+          subject: "New Subscriber - Mindset Before Skillset",
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
               <h1 style="color: #8B5CF6; margin-bottom: 20px;">New Subscriber Alert!</h1>
@@ -54,7 +54,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
                 <p style="margin: 10px 0;"><strong>Subscribed At:</strong> ${new Date().toLocaleString()}</p>
               </div>
-              <p style="color: #666;">Someone just joined the Mindset Before Skillset movement! 🚀</p>
+              <p style="color: #666;">Someone just joined the Mindset Before Skillset movement!</p>
             </div>
           `,
         });
