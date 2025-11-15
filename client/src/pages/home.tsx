@@ -79,14 +79,14 @@ export default function Home() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 py-12 md:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left: Book Cover */}
-            <div 
-              className={`flex justify-center lg:justify-end transition-all duration-1000 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
-              }`}
-            >
+<div className="relative z-10 container mx-auto px-4 py-12 md:py-16">
+  <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    {/* Left: Book Cover - CENTERED */}
+    <div 
+      className={`flex justify-center transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"
+      }`}
+      >
               <div className="relative animate-float">
                 <img
                   src={bookCoverUrl}
