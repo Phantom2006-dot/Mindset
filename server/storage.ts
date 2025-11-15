@@ -1,37 +1,43 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { type Subscriber, type InsertSubscriber } from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getSubscriber(id: string): Promise<Subscriber | undefined>;
+  getSubscriberByEmail(email: string): Promise<Subscriber | undefined>;
+  createSubscriber(subscriber: InsertSubscriber): Promise<Subscriber>;
+  getAllSubscribers(): Promise<Subscriber[]>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private subscribers: Map<string, Subscriber>;
 
   constructor() {
-    this.users = new Map();
+    this.subscribers = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getSubscriber(id: string): Promise<Subscriber | undefined> {
+    return this.subscribers.get(id);
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
+  async getSubscriberByEmail(email: string): Promise<Subscriber | undefined> {
+    return Array.from(this.subscribers.values()).find(
+      (subscriber) => subscriber.email === email,
     );
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createSubscriber(insertSubscriber: InsertSubscriber): Promise<Subscriber> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const subscriber: Subscriber = {
+      ...insertSubscriber,
+      id,
+      subscribedAt: new Date(),
+    };
+    this.subscribers.set(id, subscriber);
+    return subscriber;
+  }
+
+  async getAllSubscribers(): Promise<Subscriber[]> {
+    return Array.from(this.subscribers.values());
   }
 }
 
