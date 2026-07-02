@@ -4,6 +4,34 @@ import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 
+// CORS — allow the Vercel frontend (and any *.vercel.app preview URLs)
+app.use((req, res, next) => {
+  const origin = req.headers.origin || "";
+  const allowedOrigin =
+    process.env.FRONTEND_URL ||        // e.g. https://your-app.vercel.app
+    "";
+
+  const isAllowed =
+    origin === allowedOrigin ||
+    origin.endsWith(".vercel.app") ||
+    // Allow same-origin requests (no origin header) and local dev
+    !origin;
+
+  if (isAllowed && origin) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+  }
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
+  next();
+});
+
 declare module 'http' {
   interface IncomingMessage {
     rawBody: unknown
